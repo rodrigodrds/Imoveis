@@ -23,7 +23,7 @@ class VivarealSpider(scrapy.Spider):
             yield request
 
     def handle_detail(self, response):
-        imoveis = response.meta["imoveis"]
+        #imoveis = response.meta["imoveis"]
         # url = 'http://www.example.com'
         #
         # Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36
@@ -37,19 +37,15 @@ class VivarealSpider(scrapy.Spider):
         # yield Request(url, headers=headers)
         # request = scrapy.Request(url, headers=headers)
         # fetch(request)
-
+        #
         #zap_json = response.css('body').re_first(r'application\/ld\+json\"\>(.*)\<\/script')
         #zap_img = response.css('.img-container img::attr(src)').extract()
-        imgs_vivareal = response.css('.thumbs__item img::attr(data-src)').extract()
-
-        json_vivareal = json.loads( response.css('.site-main__form-lead').re_first(r'data\-all\=.*(\{.*\}).*data\-recommendations') )#.replace("'",'"') 
-
+        #
         # telefone = list(set(response.css('a::attr(href)').re(r'tel\:(\d*)')))
         # #valores = response.css('.property-information--prices *::text').extract()
         # #response.css('.property-information__sub-price *::text').extract()
         # tipo_valores = response.css('.property-information__sub-price').re(r'title\"\>(\w+)')
         # valores = response.css('.property-information__sub-price').re(r'R\$\ (.*)\<\/dd')
-
         # imoveis['url'] = response.url
         # imoveis['titulo'] = response.css('span.property-title__name::text').extract_first()
         # imoveis['quartos'] = response.css('.icon-room > .property-information__item-description--expanded *::text').extract_first()
@@ -57,15 +53,12 @@ class VivarealSpider(scrapy.Spider):
         # imoveis['banheiros'] = response.css('.icon-bathroom > .property-information__item-description--expanded *::text').extract_first()
         # imoveis['vagas'] = response.css('.icon-garage > .property-information__item-description--expanded *::text').extract_first()
         # imoveis['area'] = response.css('.icon-area span.property-information__item-unit::text').extract_first()
-
         # imoveis['tipo_imovel'] = response.css('.icon-building dd.property-information__item-description::text').extract_first()
         # imoveis['venda'] = float( response.css('.icon-price span.property-information__item-unit::text').re_first(r'R\$ (.*)') )
-
         # imoveis['condominio'] = float( valores[tipo_valores.index('Condomínio')] )
         # imoveis['iptu'] = float( valores[tipo_valores.index('IPTU')] )
         # imoveis['aluguel_total'] = float( response.css('.property-information__item-unit--highlight::text').re_first(r'R\$\ (.*)') )#valores[valores.index('Valor com condomínio')+1]
         # imoveis['aluguel'] = imoveis['aluguel_total'] - imoveis['condominio']
-        
         # imoveis['descricao'] = response.css('.property-description__detail *::text').extract_first()
         # imoveis['endereco'] = response.css('.touch-nav__address *::text').extract_first()
         # imoveis['logradouro'] = response.css('.map-location__address *::text').extract_first()
@@ -77,7 +70,8 @@ class VivarealSpider(scrapy.Spider):
         # imoveis['imob_cod'] = response.css('.publisher__contact-info > strong:nth-child(2) *::text').extract_first()
         # imoveis['info_legais'] = response.css('.legal-information__detail *::text').extract()
 
+        vivareal_imgs = response.css('.thumbs__item img::attr(data-src)').extract()
+        vivareal_json = json.loads( response.css('.site-main__form-lead').re_first(r'data\-all\=.*(\{.*\}).*data\-recommendations') )#.replace("'",'"') 
 
-        #response.css('.legal-information__detail > p *::text').extract_first()
-        yield json_vivareal
+        yield vivareal_json
         # return imoveis
