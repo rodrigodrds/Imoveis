@@ -11,6 +11,7 @@ import scrapy
 class ImoveisItem(scrapy.Item):
     url = scrapy.Field()
     titulo = scrapy.Field()
+    site = scrapy.Field()
 
     aluguel = scrapy.Field()
     condominio = scrapy.Field()

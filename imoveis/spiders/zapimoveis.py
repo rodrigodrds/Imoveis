@@ -19,6 +19,7 @@ class ZapimoveisSpider(scrapy.Spider):
 
     def parse(self, response):
         imoveis = ImoveisItem()
+        imoveis["site"] = "zapimoveis"
 
         for link in response.css('a.btn-ver-detalhes::attr(href)').extract():
             # self.log(link)

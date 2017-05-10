@@ -14,6 +14,7 @@ class VivarealSpider(scrapy.Spider):
 
     def parse(self, response):
         imoveis = ImoveisItem()
+        imoveis["site"] = "vivareal"
 
         for link in response.css('a.property-card__title::attr(href)').extract():
             link = 'https://www.vivareal.com.br' + link
@@ -72,6 +73,6 @@ class VivarealSpider(scrapy.Spider):
 
         vivareal_imgs = response.css('.thumbs__item img::attr(data-src)').extract()
         vivareal_json = json.loads( response.css('.site-main__form-lead').re_first(r'data\-all\=.*(\{.*\}).*data\-recommendations') )#.replace("'",'"') 
-
+        vivareal_json["site"] = "vivareal"
         yield vivareal_json
         # return imoveis
